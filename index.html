@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solvana — Powering Libya with Sustainable Solar Solutions</title>
+    <meta name="description" content="Solvana Company for Electrical Systems & Solar Energy Solutions. High-quality solar energy and electrical solutions meeting international and European standards in Libya.">
+    <meta property="og:title" content="Solvana — Renewable Energy Solutions">
+    <meta property="og:description" content="Powering Libya with Sustainable Solar Solutions. High-quality solar energy systems meeting European standards.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="assets/solvana_icon.jpeg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- NAVBAR                                      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <header class="navbar" id="navbar">
+        <a href="#hero" class="navbar__logo">SOLVANA</a>
+        <div class="navbar__descriptor">
+            <span class="navbar__descriptor-title">Renewable Energy Solutions</span>
+            <span class="navbar__descriptor-sub">Based in Benghazi, Libya</span>
+        </div>
+        <nav class="navbar__links" id="navLinks">
+            <a href="#works" class="navbar__link">Works,</a>
+            <a href="#services" class="navbar__link">Services,</a>
+            <a href="#about" class="navbar__link">About Us,</a>
+            <a href="#contact" class="navbar__link">Contact</a>
+        </nav>
+        <a href="#contact" class="navbar__cta">Let's Connect</a>
+        <button class="navbar__burger" id="burgerBtn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <nav class="mobile-menu__nav">
+            <a href="#works" class="mobile-menu__link">Works</a>
+            <a href="#services" class="mobile-menu__link">Services</a>
+            <a href="#about" class="mobile-menu__link">About Us</a>
+            <a href="#contact" class="mobile-menu__link">Contact</a>
+        </nav>
+        <div class="mobile-menu__footer">
+            <a href="tel:+218922991991">+218 92 299 1991</a>
+            <a href="mailto:nedal.grewo@solvana-ly.com">nedal.grewo@solvana-ly.com</a>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HERO SECTION                                -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="hero" id="hero">
+        <!-- Interactive Canvas Background -->
+        <canvas class="hero__canvas" id="heroCanvas"></canvas>
+
+        <!-- Video Background Layer -->
+        <div class="hero__video-bg">
+            <video autoplay muted loop playsinline>
+                <source src="assets/video1.MP4" type="video/mp4">
+            </video>
+            <div class="hero__video-overlay"></div>
+        </div>
+
+        <!-- Animated Sun Graphic -->
+        <div class="hero__sun" id="heroSun">
+            <svg viewBox="0 0 200 200" class="hero__sun-svg">
+                <defs>
+                    <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#FFD93D" stop-opacity="1"/>
+                        <stop offset="50%" stop-color="#F5A623" stop-opacity="0.8"/>
+                        <stop offset="100%" stop-color="#F5A623" stop-opacity="0"/>
+                    </radialGradient>
+                    <filter id="sunGlow">
+                        <feGaussianBlur stdDeviation="8" result="blur"/>
+                        <feMerge>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                <circle cx="100" cy="100" r="35" fill="url(#sunGrad)" filter="url(#sunGlow)"/>
+                <!-- Sun rays -->
+                <g class="hero__sun-rays" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" opacity="0.5">
+                    <line x1="100" y1="20" x2="100" y2="45"/>
+                    <line x1="100" y1="155" x2="100" y2="180"/>
+                    <line x1="20" y1="100" x2="45" y2="100"/>
+                    <line x1="155" y1="100" x2="180" y2="100"/>
+                    <line x1="43" y1="43" x2="61" y2="61"/>
+                    <line x1="139" y1="139" x2="157" y2="157"/>
+                    <line x1="157" y1="43" x2="139" y2="61"/>
+                    <line x1="43" y1="157" x2="61" y2="139"/>
+                    <!-- Extra subtle rays -->
+                    <line x1="100" y1="8" x2="100" y2="28" opacity="0.3"/>
+                    <line x1="100" y1="172" x2="100" y2="192" opacity="0.3"/>
+                    <line x1="8" y1="100" x2="28" y2="100" opacity="0.3"/>
+                    <line x1="172" y1="100" x2="192" y2="100" opacity="0.3"/>
+                </g>
+                <!-- Orbit ring -->
+                <circle cx="100" cy="100" r="70" fill="none" stroke="#F5A623" stroke-width="0.5" opacity="0.2" stroke-dasharray="4 8"/>
+                <circle cx="100" cy="100" r="90" fill="none" stroke="#F5A623" stroke-width="0.3" opacity="0.1" stroke-dasharray="2 12"/>
+            </svg>
+        </div>
+
+        <!-- Floating Tags -->
+        <div class="hero__floating-tags">
+            <span class="floating-tag floating-tag--amber" style="top: 15%; left: 8%;">Solar Energy</span>
+            <span class="floating-tag floating-tag--teal" style="top: 22%; left: 68%;">Sustainable</span>
+            <span class="floating-tag floating-tag--gold" style="top: 12%; right: 10%;">Solvana</span>
+            <span class="floating-tag floating-tag--green" style="bottom: 35%; left: 5%;">Innovation</span>
+            <span class="floating-tag floating-tag--blue" style="bottom: 28%; right: 8%;">Libya 2025</span>
+            <span class="floating-tag floating-tag--warm" style="top: 40%; left: 75%;">European Standards</span>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="hero__content">
+            <h1 class="hero__headline">
+                <span class="hero__headline-word hero__headline-word--1">Success</span>
+                <span class="hero__headline-word hero__headline-word--2">Designed</span>
+                <span class="hero__headline-word hero__headline-word--3">Differently</span>
+            </h1>
+            <div class="hero__brand">
+                <span class="hero__brand-left">SOLVA</span>
+                <span class="hero__brand-line"></span>
+                <span class="hero__brand-right">NA</span>
+            </div>
+            <p class="hero__tagline">Powering Libya with Sustainable Solar Solutions</p>
+            <a href="#contact" class="hero__cta-btn">
+                <span>Get a Free Consultation</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+
+        <!-- Bottom Stats Bar -->
+        <div class="hero__bottom-bar">
+            <div class="hero__bottom-stat">
+                <span class="hero__bottom-stat-num">50+</span>
+                <span class="hero__bottom-stat-label">Projects</span>
+            </div>
+            <div class="hero__bottom-divider"></div>
+            <div class="hero__bottom-stat">
+                <span class="hero__bottom-stat-num">10+</span>
+                <span class="hero__bottom-stat-label">MW Installed</span>
+            </div>
+            <div class="hero__bottom-divider"></div>
+            <div class="hero__bottom-stat">
+                <span class="hero__bottom-stat-num">DE→LY</span>
+                <span class="hero__bottom-stat-label">German Engineering</span>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="hero__scroll-indicator">
+            <div class="hero__scroll-circle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 5v14M5 12l7 7 7-7"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- ABOUT STATEMENT SECTION                     -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="statement" id="about">
+        <div class="statement__floating-tags">
+            <span class="floating-tag floating-tag--teal" style="top: 12%; right: 28%;">Benghazi</span>
+            <span class="floating-tag floating-tag--amber" style="top: 22%; left: 32%;">European Standards</span>
+        </div>
+        <div class="statement__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+        </div>
+        <div class="statement__content reveal">
+            <p class="statement__text">
+                To provide high-quality solar energy and electrical solutions that meet international and European standards, delivering reliable and sustainable energy systems to the Libyan market.
+            </p>
+        </div>
+        <div class="statement__watermark">360°</div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- VISION STRIP                                -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="vision-strip reveal">
+        <p class="vision-strip__text">
+            Known for integrating European-standard solar systems with expert engineering, we turn sunlight into sustainable, reliable energy solutions for Libya's future.
+        </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- WORKS / PROJECTS SECTION                    -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="works" id="works">
+        <div class="works__watermark">Our Projects</div>
+
+        <!-- Project 1 -->
+        <div class="works__project reveal" id="project-1">
+            <div class="works__project-media">
+                <video class="works__project-video" autoplay muted loop playsinline>
+                    <source src="assets/video1.MP4" type="video/mp4">
+                </video>
+                <div class="works__project-overlay"></div>
+            </div>
+            <div class="works__project-info">
+                <div class="works__project-meta">
+                    <span class="works__project-number">1 / 4</span>
+                </div>
+                <div class="works__project-details">
+                    <p class="works__project-desc">↳ Solar carport installation for commercial facilities — combining parking shade solutions with clean energy generation for maximum efficiency.</p>
+                    <div class="works__project-tags">
+                        <span>Solar Carport</span>
+                        <span>Commercial</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="works__project reveal" id="project-2">
+            <div class="works__project-media">
+                <img src="assets/Picture2.jpg" alt="Solar carport system design and installation" class="works__project-img" loading="lazy">
+                <div class="works__project-overlay"></div>
+            </div>
+            <div class="works__project-info">
+                <div class="works__project-meta">
+                    <span class="works__project-number">2 / 4</span>
+                </div>
+                <div class="works__project-details">
+                    <p class="works__project-desc">↳ Large-scale solar carport design and 3D modeling — providing shade and clean power while maximizing parking lot utility for businesses.</p>
+                    <div class="works__project-tags">
+                        <span>System Design</span>
+                        <span>3D Modeling</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="works__project reveal" id="project-3">
+            <div class="works__project-media">
+                <video class="works__project-video" autoplay muted loop playsinline>
+                    <source src="assets/video2.MP4" type="video/mp4">
+                </video>
+                <div class="works__project-overlay"></div>
+            </div>
+            <div class="works__project-info">
+                <div class="works__project-meta">
+                    <span class="works__project-number">3 / 4</span>
+                </div>
+                <div class="works__project-details">
+                    <p class="works__project-desc">↳ Industrial-scale solar panel array installation with detailed engineering blueprints and structural calculations for long-term performance.</p>
+                    <div class="works__project-tags">
+                        <span>Engineering</span>
+                        <span>Industrial</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="works__project reveal" id="project-4">
+            <div class="works__project-media">
+                <img src="assets/Picture4.jpg" alt="Rooftop solar installations for industrial facilities" class="works__project-img" loading="lazy">
+                <div class="works__project-overlay"></div>
+            </div>
+            <div class="works__project-info">
+                <div class="works__project-meta">
+                    <span class="works__project-number">4 / 4</span>
+                </div>
+                <div class="works__project-details">
+                    <p class="works__project-desc">↳ Rooftop photovoltaic systems for major industrial clients — Villeroy und Boch & EWE. Proven track record in European solar installations.</p>
+                    <div class="works__project-tags">
+                        <span>Rooftop PV</span>
+                        <span>International</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- STATS / TRUST SECTION                       -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="stats" id="stats">
+        <div class="stats__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+        </div>
+        <h2 class="stats__heading reveal">
+            Extension of a German company<br>
+            with hands-on experience in the<br>
+            European market.
+        </h2>
+        <div class="stats__grid reveal">
+            <div class="stats__item">
+                <div class="stats__item-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <path d="M3 9h18M9 21V9"/>
+                    </svg>
+                </div>
+                <span class="stats__item-count" data-target="50">0</span>+
+                <span class="stats__item-label">Projects Completed</span>
+            </div>
+            <div class="stats__item">
+                <div class="stats__item-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                </div>
+                <span class="stats__item-count" data-target="10">0</span>+
+                <span class="stats__item-label">MW Installed</span>
+            </div>
+            <div class="stats__item">
+                <div class="stats__item-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                </div>
+                <span class="stats__item-count" data-target="8">0</span>+
+                <span class="stats__item-label">Years Experience</span>
+            </div>
+            <div class="stats__item">
+                <div class="stats__item-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                </div>
+                <span class="stats__item-count" data-target="100">0</span>%
+                <span class="stats__item-label">Certified Products</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SERVICES SECTION                            -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="services" id="services">
+        <div class="services__header reveal">
+            <span class="services__eyebrow">A renewable energy company<br>for every stage</span>
+            <h2 class="services__title">Find the service<br>you need</h2>
+        </div>
+
+        <div class="services__list">
+            <div class="services__item reveal" data-service="installation">
+                <div class="services__item-header">
+                    <h3 class="services__item-title">Solar Panel Installation</h3>
+                    <span class="services__item-arrow">→</span>
+                </div>
+                <p class="services__item-desc">Complete supply and installation of photovoltaic solar energy systems for residential, commercial, and industrial applications.</p>
+                <div class="services__item-tags">
+                    <span class="floating-tag floating-tag--amber">Residential</span>
+                    <span class="floating-tag floating-tag--teal">Commercial</span>
+                    <span class="floating-tag floating-tag--green">Industrial</span>
+                </div>
+            </div>
+
+            <div class="services__item reveal" data-service="design">
+                <div class="services__item-header">
+                    <h3 class="services__item-title">System Design & Engineering</h3>
+                    <span class="services__item-arrow">→</span>
+                </div>
+                <p class="services__item-desc">Expert design and implementation of photovoltaic systems with detailed engineering calculations and 3D modeling.</p>
+                <div class="services__item-tags">
+                    <span class="floating-tag floating-tag--blue">3D Design</span>
+                    <span class="floating-tag floating-tag--gold">Engineering</span>
+                </div>
+            </div>
+
+            <div class="services__item reveal" data-service="consultation">
+                <div class="services__item-header">
+                    <h3 class="services__item-title">Technical Consultation</h3>
+                    <span class="services__item-arrow">→</span>
+                </div>
+                <p class="services__item-desc">Professional technical consultation and customized engineering solutions tailored to your energy needs and site conditions.</p>
+                <div class="services__item-tags">
+                    <span class="floating-tag floating-tag--warm">Expert Advice</span>
+                    <span class="floating-tag floating-tag--teal">Site Analysis</span>
+                </div>
+            </div>
+
+            <div class="services__item reveal" data-service="carport">
+                <div class="services__item-header">
+                    <h3 class="services__item-title">Solar Carport Systems</h3>
+                    <span class="services__item-arrow">→</span>
+                </div>
+                <p class="services__item-desc">Innovative solar carport installations that provide vehicle shade while generating clean energy — dual-purpose infrastructure.</p>
+                <div class="services__item-tags">
+                    <span class="floating-tag floating-tag--green">Carport</span>
+                    <span class="floating-tag floating-tag--amber">Dual Purpose</span>
+                </div>
+            </div>
+
+            <div class="services__item reveal" data-service="ac">
+                <div class="services__item-header">
+                    <h3 class="services__item-title">AC Power Systems</h3>
+                    <span class="services__item-arrow">→</span>
+                </div>
+                <p class="services__item-desc">Alternating current power system design and installation for commercial and industrial grid-connected solar solutions.</p>
+                <div class="services__item-tags">
+                    <span class="floating-tag floating-tag--blue">Grid-Connected</span>
+                    <span class="floating-tag floating-tag--gold">AC Systems</span>
+                </div>
+            </div>
+
+            <div class="services__item reveal" data-service="dc">
+                <div class="services__item-header">
+                    <h3 class="services__item-title">DC Power Systems</h3>
+                    <span class="services__item-arrow">→</span>
+                </div>
+                <p class="services__item-desc">Direct current power solutions including off-grid systems, battery storage integration, and standalone solar installations.</p>
+                <div class="services__item-tags">
+                    <span class="floating-tag floating-tag--warm">Off-Grid</span>
+                    <span class="floating-tag floating-tag--teal">Battery Storage</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- ABOUT US SECTION                            -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="about" id="about-detail">
+        <div class="about__image reveal">
+            <img src="assets/Picture1.jpg" alt="Solvana solar installation project" loading="lazy">
+        </div>
+        <div class="about__content reveal">
+            <span class="about__eyebrow">About Solvana</span>
+            <h2 class="about__title">An Extension of German<br>Engineering Excellence</h2>
+            <p class="about__text">
+                Solvana Company for Electrical Systems & Solar Energy Solutions is an extension of a German company with hands-on experience in the European market. We have successfully executed projects in Germany — for companies, open spaces, and carport systems.
+            </p>
+            <p class="about__text">
+                With expertise in both AC and DC systems, and products certified to international and European standards, we focus on quality, efficiency, and specialized technical consulting to bring world-class solar solutions to Libya.
+            </p>
+            <div class="about__details">
+                <div class="about__detail">
+                    <span class="about__detail-label">Founded</span>
+                    <span class="about__detail-value">2025</span>
+                </div>
+                <div class="about__detail">
+                    <span class="about__detail-label">Headquarters</span>
+                    <span class="about__detail-value">Benghazi, Libya</span>
+                </div>
+                <div class="about__detail">
+                    <span class="about__detail-label">Standards</span>
+                    <span class="about__detail-value">European & International</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- TARGET CLIENTS MARQUEE                      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="clients-marquee">
+        <div class="clients-marquee__track">
+            <span>Corporate Buildings</span>
+            <span>·</span>
+            <span>Industrial Factories</span>
+            <span>·</span>
+            <span>Government Projects</span>
+            <span>·</span>
+            <span>Commercial Facilities</span>
+            <span>·</span>
+            <span>Corporate Buildings</span>
+            <span>·</span>
+            <span>Industrial Factories</span>
+            <span>·</span>
+            <span>Government Projects</span>
+            <span>·</span>
+            <span>Commercial Facilities</span>
+            <span>·</span>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CONTACT SECTION                             -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="contact" id="contact">
+        <div class="contact__watermark">Let's Start Connected</div>
+        <button class="contact__close" id="contactClose" aria-label="Close contact form" style="display:none;">Close ✕</button>
+
+        <!-- Step 1 -->
+        <div class="contact__step contact__step--active" id="contactStep1">
+            <h2 class="contact__heading reveal">To get started, fill out the fields<br>with your personal information</h2>
+            <div class="contact__person reveal">
+                <img src="assets/solvana_icon.jpeg" alt="Solvana" class="contact__person-img">
+                <div>
+                    <span class="contact__person-name">Solvana Team</span>
+                    <span class="contact__person-role">Energy Consultants</span>
+                </div>
+            </div>
+            <form class="contact__form" id="contactForm">
+                <div class="contact__fields reveal">
+                    <div class="contact__field">
+                        <label for="contactName">Your Name*</label>
+                        <input type="text" id="contactName" name="name" required autocomplete="name">
+                    </div>
+                    <div class="contact__field">
+                        <label for="contactEmail">Email*</label>
+                        <input type="email" id="contactEmail" name="email" required autocomplete="email">
+                    </div>
+                    <div class="contact__field">
+                        <label for="contactPhone">Phone Number*</label>
+                        <input type="tel" id="contactPhone" name="phone" required autocomplete="tel">
+                    </div>
+                </div>
+                <button type="button" class="contact__next reveal" id="contactNext">↳ Next</button>
+            </form>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="contact__step" id="contactStep2">
+            <h2 class="contact__heading">Tell us about your project</h2>
+            <div class="contact__fields">
+                <div class="contact__field">
+                    <label for="contactService">Service Needed*</label>
+                    <select id="contactService" name="service" required>
+                        <option value="" disabled selected>Select a service</option>
+                        <option value="Solar Panel Installation">Solar Panel Installation</option>
+                        <option value="System Design & Engineering">System Design & Engineering</option>
+                        <option value="Technical Consultation">Technical Consultation</option>
+                        <option value="Solar Carport Systems">Solar Carport Systems</option>
+                        <option value="AC Power Systems">AC Power Systems</option>
+                        <option value="DC Power Systems">DC Power Systems</option>
+                    </select>
+                </div>
+                <div class="contact__field">
+                    <label for="contactMessage">Project Details*</label>
+                    <textarea id="contactMessage" name="message" rows="4" required placeholder="Tell us about your project, location, and requirements..."></textarea>
+                </div>
+            </div>
+            <div class="contact__actions">
+                <button type="button" class="contact__back" id="contactBack">← Back</button>
+                <button type="submit" class="contact__submit" id="contactSubmit" form="contactForm">↳ Send Message</button>
+            </div>
+        </div>
+
+        <!-- Success State -->
+        <div class="contact__step" id="contactSuccess">
+            <div class="contact__success-icon">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M8 12l3 3 5-5"/>
+                </svg>
+            </div>
+            <h2 class="contact__heading">Thank You!</h2>
+            <p class="contact__success-text">Your message has been sent successfully. Our team will get back to you within 24 hours.</p>
+            <div class="contact__success-contact">
+                <p>Or reach us directly:</p>
+                <a href="tel:+218922991991">+218 92 299 1991</a>
+                <a href="mailto:nedal.grewo@solvana-ly.com">nedal.grewo@solvana-ly.com</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- FOOTER                                      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="footer__top">
+            <div class="footer__address">
+                <span class="footer__address-city">BEN</span>
+                <p>Benghazi – Al Ahli Club Shops<br>Libya</p>
+            </div>
+            <div class="footer__address">
+                <span class="footer__address-city">DE</span>
+                <p>German Engineering Partner<br>Europe</p>
+            </div>
+        </div>
+        <div class="footer__middle">
+            <div class="footer__nav">
+                <a href="#services">Services</a>
+                <a href="#works">Works</a>
+                <a href="#about">About Us</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer__services">
+                <a href="#services">Solar Panel Installation</a>
+                <a href="#services">System Design & Engineering</a>
+                <a href="#services">Technical Consultation</a>
+                <a href="#services">Solar Carport Systems</a>
+                <a href="#services">AC Power Systems</a>
+                <a href="#services">DC Power Systems</a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="footer__social">
+                <a href="tel:+218922991991" aria-label="Phone">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                </a>
+                <a href="mailto:nedal.grewo@solvana-ly.com" aria-label="Email">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+                </a>
+            </div>
+            <span class="footer__copyright">© 2025 Solvana. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

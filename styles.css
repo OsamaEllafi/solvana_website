@@ -1329,92 +1329,45 @@ button {
    FOOTER
    ═══════════════════════════════════════════════════ */
 .footer {
-    background: var(--color-bg);
-    padding: var(--space-xl) var(--container-padding) var(--space-md);
-    border-top: 1px solid var(--color-border);
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 4rem var(--container-padding) 0;
 }
 
-.footer__top {
-    display: flex;
-    gap: var(--space-xl);
-    margin-bottom: var(--space-xl);
+.footer__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.footer__address-city {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--color-amber);
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.footer__address p {
-    font-size: 0.85rem;
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-}
-
-.footer__middle {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-xl);
-    padding: var(--space-lg) 0;
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-    flex-wrap: wrap;
-}
-
-.footer__nav {
+/* ─── Brand Column ─── */
+.footer__brand {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
-.footer__nav a {
+.footer__logo {
+    font-family: var(--font-primary);
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    color: #fff;
+}
+
+.footer__tagline {
     font-size: 0.85rem;
-    color: var(--color-text-secondary);
-    position: relative;
-    transition: color var(--duration-fast), padding-left var(--duration-fast) var(--ease-out);
-}
-
-.footer__nav a:hover {
-    opacity: 1;
-    color: var(--color-text);
-    padding-left: 0.75rem;
-}
-
-.footer__services {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    text-align: right;
-}
-
-.footer__services a {
-    font-size: 0.85rem;
-    color: var(--color-text-secondary);
-    transition: color var(--duration-fast);
-}
-
-.footer__services a:hover {
-    opacity: 1;
-    color: var(--color-text);
-}
-
-.footer__bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: var(--space-md);
-    flex-wrap: wrap;
-    gap: var(--space-sm);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 280px;
 }
 
 .footer__social {
     display: flex;
-    gap: var(--space-sm);
+    gap: 0.75rem;
+    margin-top: 0.5rem;
 }
 
 .footer__social a {
@@ -1424,21 +1377,112 @@ button {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 1px solid var(--color-border);
-    color: var(--color-text-secondary);
-    transition: all var(--duration-fast) var(--ease-out);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s var(--ease-out);
 }
 
 .footer__social a:hover {
     opacity: 1;
-    background: var(--color-text);
-    color: var(--color-white);
-    border-color: var(--color-text);
+    background: var(--color-amber);
+    color: #1a1a1a;
+    border-color: var(--color-amber);
+    transform: translateY(-2px);
+}
+
+/* ─── Columns ─── */
+.footer__col-title {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-amber);
+    margin-bottom: 1.25rem;
+}
+
+.footer__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.footer__nav a {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.3s, padding-left 0.3s var(--ease-out);
+    text-decoration: none;
+}
+
+.footer__nav a:hover {
+    opacity: 1;
+    color: #fff;
+    padding-left: 0.5rem;
+}
+
+/* ─── Offices ─── */
+.footer__offices {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.footer__office {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.footer__office-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    background: var(--color-amber);
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    width: fit-content;
+}
+
+.footer__office p {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.55;
+}
+
+/* ─── Bottom Bar ─── */
+.footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
 }
 
 .footer__copyright {
     font-size: 0.75rem;
-    color: var(--color-text-light);
+    color: rgba(255, 255, 255, 0.35);
+    letter-spacing: 0.02em;
+}
+
+.footer__back-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s var(--ease-out);
+    text-decoration: none;
+}
+
+.footer__back-top:hover {
+    opacity: 1;
+    background: var(--color-amber);
+    color: #1a1a1a;
+    border-color: var(--color-amber);
+    transform: translateY(-3px);
 }
 
 /* ═══════════════════════════════════════════════════

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initStatsCounter();
     initContactForm();
     initSmoothScroll();
-    initHeroCanvas();
+    initHeroParticles();
 });
 
 /* ─── Navbar Hide/Show on Scroll ─── */
@@ -84,7 +84,6 @@ function initScrollReveal() {
 function initFloatingTags() {
     const hero = document.querySelector('.hero');
     const tags = document.querySelectorAll('.hero__floating-tags .floating-tag');
-    const sun = document.getElementById('heroSun');
 
     if (!hero || tags.length === 0) return;
 
@@ -99,20 +98,12 @@ function initFloatingTags() {
             const ty = y * speed;
             tag.style.transform = `translate(${tx}px, ${ty}px)`;
         });
-
-        // Sun parallax (slower, subtler)
-        if (sun) {
-            const sunTx = x * -15;
-            const sunTy = y * -10;
-            sun.style.transform = `translate(${sunTx}px, ${sunTy}px)`;
-        }
     });
 
     hero.addEventListener('mouseleave', () => {
         tags.forEach(tag => {
             tag.style.transform = '';
         });
-        if (sun) sun.style.transform = '';
     });
 }
 
@@ -281,157 +272,206 @@ function initSmoothScroll() {
     });
 }
 
-/* ─── Interactive Hero Canvas (Solar Particles) ─── */
-function initHeroCanvas() {
-    const canvas = document.getElementById('heroCanvas');
+/* ═══════════════════════════════════════════════════
+   INTERACTIVE DOT LIGHTNING ⚡ — Hero Background
+   ═══════════════════════════════════════════════════ */
+function initHeroParticles() {
+    const canvas = document.getElementById('heroParticles');
     if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
-    let width, height;
-    let mouseX = -1000, mouseY = -1000;
+
+    // ─── Configuration ───
+    const CONFIG = {
+        dotRadius: 2.3,
+        dotSpacing: 6,         // pixel gap between sampled dots
+        mouseRadius: 100,      // influence radius in px
+        mouseForce: 55,        // max push distance
+        springBack: 0.07,      // how fast dots return (0-1)
+        damping: 0.87,         // velocity damping
+        dotColor: '26, 26, 26',
+        baseOpacity: 0.5,
+        floatAmplitude: 8,     // floating bob in px
+        floatSpeed: 0.0012,    // floating speed
+    };
+
+    let width, height, dpr;
+    let mouseX = -9999, mouseY = -9999;
     let particles = [];
-    let animationId;
+    let animId;
+    let time = 0;
 
-    const PARTICLE_COUNT = 60;
-    const CONNECTION_DISTANCE = 120;
-    const MOUSE_RADIUS = 150;
-
-    class Particle {
-        constructor() {
-            this.reset();
+    // ─── Dot class ───
+    class Dot {
+        constructor(x, y, opacity) {
+            this.baseX = x;
+            this.baseY = y;
+            this.opacity = opacity;
+            this.screenX = 0;
+            this.screenY = 0;
+            this.dx = 0;
+            this.dy = 0;
+            this.vx = 0;
+            this.vy = 0;
+            this.phase = Math.random() * Math.PI * 2;
         }
 
-        reset() {
-            this.x = Math.random() * width;
-            this.y = Math.random() * height;
-            this.size = Math.random() * 2.5 + 0.5;
-            this.speedX = (Math.random() - 0.5) * 0.4;
-            this.speedY = (Math.random() - 0.5) * 0.3 - 0.1; // slight upward drift
-            this.opacity = Math.random() * 0.5 + 0.2;
-            this.hue = 35 + Math.random() * 20; // amber range
-            this.pulse = Math.random() * Math.PI * 2;
-            this.pulseSpeed = 0.02 + Math.random() * 0.02;
-        }
+        update(cx, cy, floatY, t) {
+            const microFloat = Math.sin(t * 2 + this.phase) * 1.5;
+            this.screenX = cx + this.baseX + this.dx;
+            this.screenY = cy + this.baseY + floatY + microFloat + this.dy;
 
-        update() {
-            this.pulse += this.pulseSpeed;
-            const pulseFactor = 0.7 + Math.sin(this.pulse) * 0.3;
+            const ddx = this.screenX - mouseX;
+            const ddy = this.screenY - mouseY;
+            const dist = Math.sqrt(ddx * ddx + ddy * ddy);
 
-            // Mouse interaction
-            const dx = this.x - mouseX;
-            const dy = this.y - mouseY;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < MOUSE_RADIUS) {
-                const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
-                this.x += dx * force * 0.02;
-                this.y += dy * force * 0.02;
+            if (dist < CONFIG.mouseRadius && dist > 0) {
+                const force = (1 - dist / CONFIG.mouseRadius) * CONFIG.mouseForce;
+                const angle = Math.atan2(ddy, ddx);
+                this.vx += Math.cos(angle) * force * 0.12;
+                this.vy += Math.sin(angle) * force * 0.12;
             }
 
-            this.x += this.speedX;
-            this.y += this.speedY;
-
-            // Wrap around
-            if (this.x < -10) this.x = width + 10;
-            if (this.x > width + 10) this.x = -10;
-            if (this.y < -10) this.y = height + 10;
-            if (this.y > height + 10) this.y = -10;
-
-            this.currentOpacity = this.opacity * pulseFactor;
-            this.currentSize = this.size * pulseFactor;
+            this.vx -= this.dx * CONFIG.springBack;
+            this.vy -= this.dy * CONFIG.springBack;
+            this.vx *= CONFIG.damping;
+            this.vy *= CONFIG.damping;
+            this.dx += this.vx;
+            this.dy += this.vy;
         }
 
-        draw() {
+        draw(ctx) {
+            const displacement = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
+            const glowBoost = Math.min(displacement / 25, 0.45);
+            const finalOpacity = Math.min(this.opacity + glowBoost, 0.9);
+
             ctx.beginPath();
-            ctx.arc(this.x, this.y, this.currentSize, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${this.hue}, 80%, 65%, ${this.currentOpacity})`;
+            ctx.arc(this.screenX, this.screenY, CONFIG.dotRadius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${CONFIG.dotColor}, ${finalOpacity})`;
             ctx.fill();
-
-            // Glow
-            if (this.currentSize > 1.5) {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.currentSize * 3, 0, Math.PI * 2);
-                ctx.fillStyle = `hsla(${this.hue}, 80%, 65%, ${this.currentOpacity * 0.1})`;
-                ctx.fill();
-            }
         }
     }
 
-    function resize() {
-        width = canvas.width = canvas.offsetWidth;
-        height = canvas.height = canvas.offsetHeight;
-    }
+    // ─── Sample ⚡ shape from offscreen canvas ───
+    function sampleShape() {
+        const size = Math.round(Math.min(width, height) * 0.65);
+        const offCanvas = document.createElement('canvas');
+        offCanvas.width = size;
+        offCanvas.height = size;
+        const offCtx = offCanvas.getContext('2d');
 
-    function init() {
-        resize();
-        particles = [];
-        for (let i = 0; i < PARTICLE_COUNT; i++) {
-            particles.push(new Particle());
-        }
-    }
+        // Draw the ⚡ emoji
+        offCtx.textAlign = 'center';
+        offCtx.textBaseline = 'middle';
+        offCtx.font = `${size * 0.85}px serif`;
+        offCtx.fillText('⚡', size / 2, size / 2);
 
-    function drawConnections() {
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
+        const imageData = offCtx.getImageData(0, 0, size, size);
+        const data = imageData.data;
+        const dots = [];
+        const spacing = CONFIG.dotSpacing;
+        const halfSize = size / 2;
 
-                if (dist < CONNECTION_DISTANCE) {
-                    const opacity = (1 - dist / CONNECTION_DISTANCE) * 0.15;
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(245, 166, 35, ${opacity})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
+        for (let y = 0; y < size; y += spacing) {
+            for (let x = 0; x < size; x += spacing) {
+                const idx = (y * size + x) * 4;
+                const alpha = data[idx + 3];
+
+                if (alpha > 30) {
+                    const px = x - halfSize;
+                    const py = y - halfSize;
+                    const opacity = CONFIG.baseOpacity * (alpha / 255);
+                    dots.push(new Dot(px, py, opacity));
                 }
             }
         }
+
+        return dots;
     }
 
-    function animate() {
-        ctx.clearRect(0, 0, width, height);
-
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
-
-        drawConnections();
-        animationId = requestAnimationFrame(animate);
+    // ─── Resize ───
+    function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = rect.width;
+        height = rect.height;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        CONFIG.mouseRadius = Math.min(width, height) * 0.1;
     }
 
-    // Mouse tracking
-    canvas.addEventListener('mousemove', (e) => {
+    // ─── Mouse tracking ───
+    function onMouseMove(e) {
         const rect = canvas.getBoundingClientRect();
         mouseX = e.clientX - rect.left;
         mouseY = e.clientY - rect.top;
-    });
+    }
 
-    canvas.addEventListener('mouseleave', () => {
-        mouseX = -1000;
-        mouseY = -1000;
-    });
+    function onMouseLeave() {
+        mouseX = -9999;
+        mouseY = -9999;
+    }
 
-    // Performance: pause when not visible
-    const observer = new IntersectionObserver((entries) => {
+    function onTouchMove(e) {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        mouseX = touch.clientX - rect.left;
+        mouseY = touch.clientY - rect.top;
+    }
+
+    function onTouchEnd() {
+        mouseX = -9999;
+        mouseY = -9999;
+    }
+
+    // ─── Animation Loop ───
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+        time += CONFIG.floatSpeed;
+
+        const floatY = Math.sin(time) * CONFIG.floatAmplitude;
+        const cx = width / 2;
+        const cy = height / 2;
+
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(cx, cy, floatY, time);
+            particles[i].draw(ctx);
+        }
+
+        animId = requestAnimationFrame(animate);
+    }
+
+    // ─── Visibility: pause when off-screen ───
+    const heroSection = document.getElementById('hero');
+    const visibilityObs = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                if (!animationId) animate();
+                if (!animId) animate();
             } else {
-                cancelAnimationFrame(animationId);
-                animationId = null;
+                if (animId) {
+                    cancelAnimationFrame(animId);
+                    animId = null;
+                }
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05 });
+    visibilityObs.observe(heroSection);
 
-    observer.observe(canvas);
+    // ─── Init ───
+    resize();
+    particles = sampleShape();
 
     window.addEventListener('resize', () => {
         resize();
+        particles = sampleShape();
     });
 
-    init();
+    heroSection.addEventListener('mousemove', onMouseMove);
+    heroSection.addEventListener('mouseleave', onMouseLeave);
+    heroSection.addEventListener('touchmove', onTouchMove, { passive: true });
+    heroSection.addEventListener('touchend', onTouchEnd);
+
     animate();
 }
-
